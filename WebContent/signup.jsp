@@ -63,7 +63,10 @@
       <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="">
     </div>
   </div>
-
+  <div>
+  <a href="login.jsp">Already have an account? Login here </a>
+  
+  </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
 

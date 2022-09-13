@@ -21,6 +21,10 @@
     <label for="exampleInputPassword1">Password</label>
     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="">
   </div>
+  <div>
+   <a href="signup.jsp">Don't have an account? Sign up here </a>
+  </div>
+ 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

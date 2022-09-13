@@ -47,15 +47,15 @@ if (session.getAttribute("name")==null){
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>      
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
     
   </div>
         <a class="nav-link">Hello, <%=session.getAttribute("name") %><span class="sr-only">(current)</span></a>
      	<a class="nav-link btn bg-success" href="logout">Logout <span class="sr-only">(current)</span></a>
 </nav>
+
+<a href="searchrecord.jsp"> <button class="btn btn-secondary btn-lg">Search</button> </a>
+<button type="button" class="btn btn-secondary btn-lg">all records</button>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
