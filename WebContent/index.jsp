@@ -55,7 +55,7 @@ if (session.getAttribute("name")==null){
 </nav>
 
 <a href="searchrecord.jsp"> <button class="btn btn-secondary btn-lg">Search</button> </a>
-<button type="button" class="btn btn-secondary btn-lg">all records</button>
+<a href="allrecords.jsp"> <button class="btn btn-secondary btn-lg">All Records</button> </a>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

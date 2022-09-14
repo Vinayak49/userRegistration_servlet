@@ -2,11 +2,11 @@ package com.Hotwax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,17 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-/**
- * Servlet implementation class SignupServlet
- */
-@WebServlet("/Signup")
-public class SignupServlet extends HttpServlet {
+@WebServlet("/update")
+public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.print("Workinnnn");
-		
+		String partyid = request.getParameter("partyid");
 		String firstName = request.getParameter("fname");
 		String lastName = request.getParameter("lname");
 		String address = request.getParameter("address");
@@ -43,16 +38,9 @@ public class SignupServlet extends HttpServlet {
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject", "root","123456");
-			
-			int party = 0;
-			PreparedStatement preparedStatement1 = connection.prepareStatement("select max(partyId) from party");
-			ResultSet rs = preparedStatement1.executeQuery();
-			if (rs.next()){
-				party = rs.getInt(1);
-				party++;
-			PreparedStatement preparedStatement = connection.prepareStatement("insert into party(partyId,firstname,lastname,address,city,zip,state,country,phone,password) values(?,?,?,?,?,?,?,?,?,?)");
-			
-			preparedStatement.setInt(1, party);
+			PreparedStatement preparedStatement = connection.prepareStatement("update party set partyId=?,firstname=?,lastname=?,address=?,city=?,zip=?,state=?,country=?,phone=?,password=?");
+
+			preparedStatement.setInt(1, Integer.parseInt(partyid));
 			preparedStatement.setString(2, firstName);
 			preparedStatement.setString(3, lastName);
 			preparedStatement.setString(4, address);
@@ -70,7 +58,6 @@ public class SignupServlet extends HttpServlet {
 			}
 			else{
 				request.setAttribute("status", "failed");
-			}
 			}
 			dispatcher.forward(request, response);
 			
