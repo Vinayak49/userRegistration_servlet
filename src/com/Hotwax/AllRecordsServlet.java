@@ -34,8 +34,11 @@ public class AllRecordsServlet extends HttpServlet {
 	public boolean deleteRecord( int partyId ) throws SQLException{
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject", "root","123456");
 //		PreparedStatement preparedStatement = connection.prepareStatement();
+		Statement s1 = connection.createStatement();
+		int j = s1.executeUpdate("Delete from userlogin where partyId="+partyId);
 		Statement s = connection.createStatement();
 		int i  = s.executeUpdate("Delete from party where partyId ="+partyId);
+		
 		
 		if (i>0){
 			return true;

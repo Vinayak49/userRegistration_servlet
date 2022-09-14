@@ -22,7 +22,7 @@
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Lastname</label>
-      <input type="text" name="lname" class="form-control" id="inputPassword4" placeholder="Last name">
+      <input type="text" name="lname" class="form-control" id="inputPassword4" placeholder="Last name" required>
     </div>
   </div>
   <div class="form-group">
@@ -56,7 +56,7 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">User Login Id</label>
-      <input type="number" name="userid" class="form-control" id="inputEmail4" placeholder="">
+      <input type="email" name="userid" class="form-control" id="inputEmail4" placeholder="">
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Password</label>

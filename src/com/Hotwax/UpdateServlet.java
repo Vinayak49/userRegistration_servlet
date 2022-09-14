@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/update")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String partyid = request.getParameter("partyid");
 		String firstName = request.getParameter("fname");
@@ -34,11 +34,11 @@ public class UpdateServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		RequestDispatcher dispatcher = 	null;
 		Connection connection= null;
-		
+
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject", "root","123456");
-			PreparedStatement preparedStatement = connection.prepareStatement("update party set partyId=?,firstname=?,lastname=?,address=?,city=?,zip=?,state=?,country=?,phone=?,password=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("update party set partyId=?,firstName=?,lastName=?,address=?,city=?,zip=?,state=?,country=?,phone=?,password=? where partyId=?");
 
 			preparedStatement.setInt(1, Integer.parseInt(partyid));
 			preparedStatement.setString(2, firstName);
@@ -50,9 +50,10 @@ public class UpdateServlet extends HttpServlet {
 			preparedStatement.setString(8, country);
 			preparedStatement.setString(9, phone);
 			preparedStatement.setString(10, password);
-			
+			preparedStatement.setInt(11, Integer.parseInt(partyid));
+
 			int rowCount = preparedStatement.executeUpdate();
-			dispatcher = request.getRequestDispatcher("signup.jsp");
+			dispatcher = request.getRequestDispatcher("allrecords.jsp");
 			if (rowCount>0){
 				request.setAttribute("status", "success");
 			}
@@ -60,7 +61,7 @@ public class UpdateServlet extends HttpServlet {
 				request.setAttribute("status", "failed");
 			}
 			dispatcher.forward(request, response);
-			
+
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -73,7 +74,7 @@ public class UpdateServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-			
+
 //		out.println(firstName + password + zip);
 	}
 

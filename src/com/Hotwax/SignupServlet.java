@@ -14,19 +14,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+//import javax.mail.Address;
 
 
-/**
- * Servlet implementation class SignupServlet
- */
+
 @WebServlet("/Signup")
 public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		out.print("Workinnnn");
-		
+		out.print("Workinnnn");		
 		String firstName = request.getParameter("fname");
 		String lastName = request.getParameter("lname");
 		String address = request.getParameter("address");
@@ -62,7 +60,6 @@ public class SignupServlet extends HttpServlet {
 			preparedStatement.setString(8, country);
 			preparedStatement.setString(9, phone);
 			preparedStatement.setString(10, password);
-			
 			int rowCount = preparedStatement.executeUpdate();
 			dispatcher = request.getRequestDispatcher("signup.jsp");
 			if (rowCount>0){
@@ -71,8 +68,26 @@ public class SignupServlet extends HttpServlet {
 			else{
 				request.setAttribute("status", "failed");
 			}
+			
+			PreparedStatement preparedStatement2 = connection.prepareStatement("insert into userlogin(userLoginId,password,partyId) values(?,?,?)");
+			preparedStatement2.setString(1, userid);
+			preparedStatement2.setString(2,password);
+			preparedStatement2.setInt(3, party);
+			
+			int rc = preparedStatement2.executeUpdate();
+			dispatcher = request.getRequestDispatcher("signup.jsp");
+			if (rc>0){
+				
+				request.setAttribute("status", "success");
 			}
+			else{
+				request.setAttribute("status", "failed");
+			}
+			}
+			
+//			SendGmail.sendMail("vinayaksingh7.5.00@gmail.com");
 			dispatcher.forward(request, response);
+
 			
 		}
 		catch (Exception e){
@@ -86,8 +101,17 @@ public class SignupServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+
+
+		
+//		
+//		String username = "vinshot75@gmail.com";
+//		String pswd = "wvixgjekmcceqhtd";
+//		Properties properties = new
 			
 //		out.println(firstName + password + zip);
+		
+		
 	}
 
 }
